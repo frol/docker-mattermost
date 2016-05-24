@@ -14,6 +14,8 @@ RUN apk add --no-cache --virtual build-deps \
     && git clone --depth 1 --branch v${MATTERMOST_VER} \
       https://github.com/mattermost/platform \
       ${GOPATH}/src/github.com/mattermost/platform \
+    && curl -L https://raw.githubusercontent.com/mijime/platform/issue-3042/web/web.go \
+      -o ${GOPATH}/src/github.com/mattermost/platform/web/web.go \
     && cd ${GOPATH}/src/github.com/mattermost/platform \
     && sed -i.org 's/sudo //g' Makefile \
     && make package BUILD_NUMBER=${MATTERMOST_VER} \
